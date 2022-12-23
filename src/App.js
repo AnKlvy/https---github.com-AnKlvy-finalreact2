@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+// import Container from '@mui/material/Container';
+import { CssVarsProvider, StyledEngineProvider } from '@mui/joy';
+import { useContext } from 'react'
+import { CommentContext, CommentProvider } from './commentContext';
+import TextareaValidator from './components/AddComment'
+import { Comment } from './components/Comment';
+
+
+
 
 function App() {
+  const { commentSection } = useContext(CommentContext);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    //    <StyledEngineProvider injectFirst> 
+    //  <CssVarsProvider> 
+    <div style={{
+      backgroundColor:'hsl(228, 33%, 97%)', 
+      minHeight: '100vh', 
+      minWidth: '800px',
+      }}>
+       
+      
+       
+      {commentSection.map((comment) => {
+          return <Comment key={comment.id} data={comment} />;
+        })}
+      
+    <TextareaValidator/>
+    
+    <div style={{height:'200px'}}></div>
     </div>
-  );
+    // </CssVarsProvider>
+    // </StyledEngineProvider>
+  )
 }
 
-export default App;
+export default App
